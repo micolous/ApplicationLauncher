@@ -5,3 +5,4 @@ Obj/
 *.suo
 *.user
 *.designer.cs
+*.Designer.cs
