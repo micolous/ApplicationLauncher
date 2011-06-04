@@ -209,7 +209,7 @@ namespace ApplicationLauncher
 
         private void appToolStripMenuItem_MouseEnter(object sender, EventArgs e)
         {
-            MessageToolStrip.Text = "Written 2007 - 2008 by micolous";
+            MessageToolStrip.Text = "Copyright 2007, 2008, 2011 Michael Farrell";
         }
 
         private void appToolStripMenuItem_MouseLeave(object sender, EventArgs e)
@@ -220,8 +220,23 @@ namespace ApplicationLauncher
         public void TimeTimer_Tick(object sender, EventArgs e)
         {
             DateTime n = DateTime.Now;
-            TimeToolStripItem.Text = n.ToString("dddd, HH:mm");
-            TimeToolStripItem.ToolTipText = n.ToString("dd MMMM yyyy");
+            if (Program.cfg.ClockFormat == null)
+            {
+                TimeToolStripItem.Text = n.ToShortTimeString();
+            }
+            else
+            {
+                TimeToolStripItem.Text = n.ToString(Program.cfg.ClockFormat);
+            }
+
+            if (Program.cfg.ClockFormatTooltip == null)
+            {
+                TimeToolStripItem.ToolTipText = n.ToLongDateString();
+            }
+            else
+            {
+                TimeToolStripItem.ToolTipText = n.ToString(Program.cfg.ClockFormatTooltip);
+            }
         }
 
         private void TimeToolStripItem_DropDownOpening(object sender, EventArgs e)

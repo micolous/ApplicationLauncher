@@ -34,6 +34,7 @@ namespace ApplicationLauncher
             InitializeComponent();
             progressBar1.Value = trem;
             pw = Program.cfg.UnlockPassword;
+            this.WindowState = Program.cfg.MaximiseWindows ? FormWindowState.Maximized : FormWindowState.Normal;
         }
 
         private static Random r = new Random();

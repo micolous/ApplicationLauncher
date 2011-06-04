@@ -48,7 +48,7 @@ namespace ApplicationLauncher
                 String ipath = sect.GetValue("icon");
                 try
                 {
-                    Icon = Image.FromFile(sect.GetValue("icon"));
+                    Icon = Image.FromFile(Program.cfg.PathRelativeToConfiguration(ipath));
                 }
                 catch (Exception)
                 {

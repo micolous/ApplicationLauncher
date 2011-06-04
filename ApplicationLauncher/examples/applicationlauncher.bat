@@ -1,0 +1,1 @@
+@start applicationlauncher.exe example.ini

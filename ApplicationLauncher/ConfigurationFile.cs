@@ -29,7 +29,9 @@ namespace ApplicationLauncher
     class ConfigurationFile
     {
         private IniDocument ini;
+        private string filename;
         public ConfigurationFile(String filename) : this(new StreamReader(filename)) {
+            this.filename = filename;
         }
 
         public ConfigurationFile(TextReader tr)
@@ -41,6 +43,22 @@ namespace ApplicationLauncher
             }
         }
 
+        /// <summary>
+        /// If the configuration loader knows the filename of the configuration,
+        /// it will attempt to change the path (if not rooted; ie: relative) so that a
+        /// new relative path is given that is shown as if it were relative to the
+        /// configuration file.
+        /// </summary>
+        /// <param name="input">The filename to transform.</param>
+        /// <returns>The modified path.</returns>
+        public string PathRelativeToConfiguration(string input)
+        {
+            // select the filename relative to the configuration path
+            if (this.filename != null && !Path.IsPathRooted(input))
+                input = Path.Combine(Path.GetDirectoryName(this.filename), input);
+            return input;
+        }
+
         public Image GetBanner()
         {
             String imgfn = ini.Sections["ApplicationLauncher"].GetValue("BannerImage");
@@ -50,7 +68,8 @@ namespace ApplicationLauncher
             }
             else
             {
-                return Image.FromFile(imgfn);
+
+                return Image.FromFile(PathRelativeToConfiguration(imgfn));
             }
         }
 
@@ -191,6 +210,16 @@ namespace ApplicationLauncher
         public string UnlockPassword
         {
             get { return GetStringSetting("UnlockPassword", null); }
+        }
+
+        public string ClockFormat
+        {
+            get { return GetStringSetting("ClockFormat", null); }
+        }
+
+        public string ClockFormatTooltip
+        {
+            get { return GetStringSetting("ClockFormatTooltip", null); }
         }
 
         public CloseProgramAction CloseProgramAction

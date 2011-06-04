@@ -127,6 +127,9 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <BaseApplicationManifest Include="Properties\app.manifest" />
+    <None Include="examples\applicationlauncher.bat" />
+    <None Include="examples\applicationlauncher.cmd" />
+    <None Include="examples\example.ini" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
